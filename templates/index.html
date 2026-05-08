@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+
+
+<body>
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="logo">💼</div>
+
+        <h1>Login</h1>
+
+        <p>Track all your job applications easily</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash-message">
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/login" method="POST">
+
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username">
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password">
+            </div>
+
+            <button type="submit" class="auth-btn">
+                Login
+            </button>
+
+        </form>
+
+        <div class="auth-link">
+            Don't have an account?
+            <a href="/signup-pg">Sign Up</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="dashboard-header">
+        <h1>Welcome {{username}}</h1>
+
+        <form action="/logout" method="POST">
+            <button class="logout-btn">Log Out</button>
+        </form>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div>
+
+            <div class="stats-card">
+                <h2>Total Applications</h2>
+                <p>{{jobs|length}}</p>
+            </div>
+
+            <div class="form-section">
+
+                <h2>Add Job</h2>
+
+                <form action="/add-job" method="POST">
+
+                    <div class="input-group">
+                        <input type="text" name="company" placeholder="Company Name">
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" name="role" placeholder="Role">
+                    </div>
+
+                    <div class="input-group">
+                        <select name="status">
+                            <option>Applied</option>
+                            <option>Interview</option>
+                            <option>Rejected</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="add-btn">
+                        Add Job
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="jobs-section">
+
+            {% for job in jobs %}
+
+            <div class="job-card">
+
+                <h3>{{job.company}}</h3>
+
+                <p><strong>Role:</strong> {{job.role}}</p>
+
+                <p>
+                    <strong>Status:</strong>
+
+                    <span class="status {{job.status.lower()}}">
+                        {{job.status}}
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Applied:</strong>
+                    {{job.created_at}}
+                </p>
+
+                <form action="/update-job/{{job.id}}" method="POST">
+
+                    <div class="card-actions">
+
+                        <select name="new_status" class="update-select">
+                            <option>Applied</option>
+                            <option>Interview</option>
+                            <option>Rejected</option>
+                        </select>
+
+                        <button class="update-btn">
+                            Update
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <form action="/delete-job/{{job.id}}" method="POST">
+
+                    <div class="card-actions">
+
+                        <button class="delete-btn">
+                            Delete
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
