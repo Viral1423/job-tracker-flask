@@ -1,12 +1,16 @@
 from flask import Flask, request , redirect , render_template , url_for ,flash ,session
 import bcrypt
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:Veer4220H@localhost:5432/jobtracker'
-app.secret_key = "Veer4220H"
+# app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:Veer4220H@localhost:5432/jobtracker'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get("DATABASE_URL")
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.secret_key = os.environ.get("Veer4220H")
+
 
 db = SQLAlchemy(app)
 class User(db.Model):
