@@ -9,7 +9,7 @@ app = Flask(__name__)
 # app.config['SQLALCHEMY_DATABASE_URI']='postgresql://postgres:Veer4220H@localhost:5432/jobtracker'
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-app.secret_key = os.environ.get("Veer4220H")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 
 db = SQLAlchemy(app)
